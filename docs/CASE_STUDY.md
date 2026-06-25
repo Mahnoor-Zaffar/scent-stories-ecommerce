@@ -103,5 +103,5 @@ Use these when presenting the project:
 ## Links
 
 - **GitHub:** [github.com/Mahnoor-Zaffar/scent-stories-ecommerce](https://github.com/Mahnoor-Zaffar/scent-stories-ecommerce)
-- **Live Demo:** Add your Vercel URL after deployment
+- **Live Demo:** [scent-stories-ecommerce.vercel.app](https://scent-stories-ecommerce.vercel.app)
 - **PRD:** [PRD.md](../PRD.md)

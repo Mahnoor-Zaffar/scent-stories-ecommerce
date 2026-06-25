@@ -13,7 +13,7 @@ Editorial storytelling, performance engineering, and native React architecture �
 ![Playwright](https://img.shields.io/badge/E2E-Playwright-2ead33?logo=playwright)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
-[Live Demo](#live-demo) · [Features](#features) · [Quick Start](#quick-start) · [Case Study](./docs/CASE_STUDY.md) · [Deploy](./docs/DEPLOYMENT.md)
+[Live Demo](https://scent-stories-ecommerce.vercel.app) · [Features](#features) · [Quick Start](#quick-start) · [Case Study](./docs/CASE_STUDY.md) · [Deploy](./docs/DEPLOYMENT.md)
 
 <br />
 
@@ -29,11 +29,11 @@ Editorial storytelling, performance engineering, and native React architecture �
 
 | | |
 |---|---|
-| **Production** | Deploy via [Vercel](https://vercel.com/new) — see [Deployment Guide](./docs/DEPLOYMENT.md) |
+| **Production** | [scent-stories-ecommerce.vercel.app](https://scent-stories-ecommerce.vercel.app) |
 | **Repository** | [github.com/Mahnoor-Zaffar/scent-stories-ecommerce](https://github.com/Mahnoor-Zaffar/scent-stories-ecommerce) |
 | **Local** | `npm install && npm run build && npm run dev` → [localhost:3000](http://localhost:3000) |
 
-> After deploying to Vercel, replace the Production link above with your live URL.
+**Quick links:** [Home](https://scent-stories-ecommerce.vercel.app/) · [Product PDP](https://scent-stories-ecommerce.vercel.app/products/obsidian-orchid) · [Scent Quiz](https://scent-stories-ecommerce.vercel.app/quiz) · [Checkout (GB)](https://scent-stories-ecommerce.vercel.app/checkout?region=GB) · [Private Reserve](https://scent-stories-ecommerce.vercel.app/private-reserve)
 
 ---
 
@@ -323,6 +323,7 @@ interface Variant {
 Full-stack portfolio project showcasing luxury UX, React architecture, and performance-conscious frontend engineering.
 
 - GitHub: [Mahnoor-Zaffar/scent-stories-ecommerce](https://github.com/Mahnoor-Zaffar/scent-stories-ecommerce)
+- Live Demo: [scent-stories-ecommerce.vercel.app](https://scent-stories-ecommerce.vercel.app)
 
 ---
 
