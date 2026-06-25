@@ -66,7 +66,7 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
-> **E2E tests:** `npm install` downloads the Playwright Chromium browser automatically. If tests fail with "Executable doesn't exist", run `npx playwright install chromium` once, then retry `npm run test:e2e`.
+> **E2E tests:** Tests start a production server on **port 3001** so they do not conflict with `npm run dev` on port 3000. Run `npm run build` first, then `npm run test:e2e`. If browsers are missing, run `npx playwright install chromium`. To test against an already-running dev server on port 3000, use `npm run test:e2e:dev`.
 
 ### Other scripts
 
@@ -74,7 +74,8 @@ Open [http://localhost:3000](http://localhost:3000).
 npm run build        # Production build
 npm run start        # Serve production build
 npm run lint         # ESLint
-npm run test:e2e     # Playwright E2E tests
+npm run test:e2e     # Playwright E2E (production server on port 3001)
+npm run test:e2e:dev # Playwright against dev server on port 3000
 npm run test:e2e:ui  # Playwright interactive UI
 ```
 

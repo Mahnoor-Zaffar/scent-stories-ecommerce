@@ -1,5 +1,8 @@
 import { defineConfig, devices } from "@playwright/test";
 
+const port = process.env.PLAYWRIGHT_PORT ?? "3001";
+const baseURL = process.env.PLAYWRIGHT_BASE_URL ?? `http://127.0.0.1:${port}`;
+
 export default defineConfig({
   testDir: "./e2e",
   fullyParallel: true,
@@ -8,7 +11,7 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   reporter: process.env.CI ? "github" : "list",
   use: {
-    baseURL: "http://127.0.0.1:3000",
+    baseURL,
     trace: "on-first-retry",
   },
   projects: [
@@ -17,10 +20,12 @@ export default defineConfig({
       use: { ...devices["Desktop Chrome"] },
     },
   ],
-  webServer: {
-    command: "npm run start",
-    url: "http://127.0.0.1:3000",
-    reuseExistingServer: !process.env.CI,
-    timeout: 120000,
-  },
+  webServer: process.env.PLAYWRIGHT_SKIP_WEBSERVER
+    ? undefined
+    : {
+        command: `npm run start -- -p ${port}`,
+        url: baseURL,
+        reuseExistingServer: !process.env.CI,
+        timeout: 120000,
+      },
 });
