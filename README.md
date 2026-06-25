@@ -60,10 +60,13 @@ Scent & Stories is a portfolio-grade luxury storefront featuring four integrated
 git clone https://github.com/Mahnoor-Zaffar/scent-stories-ecommerce.git
 cd scent-stories-ecommerce
 npm install
+npm run build
 npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000).
+
+> **E2E tests:** `npm install` downloads the Playwright Chromium browser automatically. If tests fail with "Executable doesn't exist", run `npx playwright install chromium` once, then retry `npm run test:e2e`.
 
 ### Other scripts
 
