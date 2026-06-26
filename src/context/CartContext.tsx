@@ -5,11 +5,20 @@ import {
   useContext,
   useReducer,
   useCallback,
+  useEffect,
+  useState,
   type ReactNode,
 } from "react";
 import type { CartLineItem, Product, Variant } from "@/types/catalog";
 import type { GeoRegion } from "@/lib/geo-ip";
-import { calculateOrderTotals, convertPrice } from "@/lib/geo-ip";
+import { calculateOrderTotals, convertPrice, REGIONS } from "@/lib/geo-ip";
+import {
+  loadPersistedCart,
+  savePersistedCart,
+  clearPersistedCart,
+  resolveCartLineItems,
+  type PersistedCart,
+} from "@/lib/cart-storage";
 
 interface CartState {
   items: CartLineItem[];
@@ -28,6 +37,7 @@ type CartAction =
   | { type: "SET_CHECKOUT_STEP"; step: CartState["checkoutStep"] }
   | { type: "SET_CUSTOMER"; email: string; phone: string }
   | { type: "SET_ORDER_NUMBER"; orderNumber: string }
+  | { type: "HYDRATE"; payload: Partial<CartState> }
   | { type: "CLEAR_CART" };
 
 function cartReducer(state: CartState, action: CartAction): CartState {
@@ -95,6 +105,8 @@ function cartReducer(state: CartState, action: CartAction): CartState {
       };
     case "SET_ORDER_NUMBER":
       return { ...state, orderNumber: action.orderNumber };
+    case "HYDRATE":
+      return { ...state, ...action.payload };
     case "CLEAR_CART":
       return { ...state, items: [], checkoutStep: "cart", orderNumber: null };
     default:
@@ -119,25 +131,56 @@ interface CartContextValue {
 
 const CartContext = createContext<CartContextValue | null>(null);
 
-const defaultRegion: GeoRegion = {
-  code: "US",
-  currency: "USD",
-  currencySymbol: "$",
-  locale: "en-US",
-  dutyRate: 0,
-  shippingRate: 12,
-  shippingLabel: "Express Domestic (2-3 days)",
+const defaultRegion: GeoRegion = REGIONS.US;
+
+const initialCartState: CartState = {
+  items: [],
+  region: defaultRegion,
+  checkoutStep: "cart",
+  customerEmail: "",
+  customerPhone: "",
+  orderNumber: null,
 };
 
+function toPersistedCart(state: CartState): PersistedCart {
+  return {
+    items: state.items.map((item) => ({
+      variantId: item.variant.id,
+      quantity: item.quantity,
+    })),
+    regionCode: state.region.code,
+    customerEmail: state.customerEmail,
+    customerPhone: state.customerPhone,
+  };
+}
+
 export function CartProvider({ children }: { children: ReactNode }) {
-  const [state, dispatch] = useReducer(cartReducer, {
-    items: [],
-    region: defaultRegion,
-    checkoutStep: "cart",
-    customerEmail: "",
-    customerPhone: "",
-    orderNumber: null,
-  });
+  const [state, dispatch] = useReducer(cartReducer, initialCartState);
+  const [isHydrated, setIsHydrated] = useState(false);
+
+  useEffect(() => {
+    const persisted = loadPersistedCart();
+    if (persisted) {
+      const items = resolveCartLineItems(persisted.items);
+      const region = REGIONS[persisted.regionCode] ?? defaultRegion;
+      dispatch({
+        type: "HYDRATE",
+        payload: {
+          items,
+          region,
+          customerEmail: persisted.customerEmail,
+          customerPhone: persisted.customerPhone,
+        },
+      });
+    }
+    setIsHydrated(true);
+  }, []);
+
+  useEffect(() => {
+    if (!isHydrated) return;
+    if (state.checkoutStep === "confirmation") return;
+    savePersistedCart(toPersistedCart(state));
+  }, [state, isHydrated]);
 
   const addItem = useCallback(
     (product: Product, variant: Variant, quantity = 1) => {
@@ -172,6 +215,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   const clearCart = useCallback(() => {
     dispatch({ type: "CLEAR_CART" });
+    clearPersistedCart();
   }, []);
 
   const itemCount = state.items.reduce((sum, item) => sum + item.quantity, 0);

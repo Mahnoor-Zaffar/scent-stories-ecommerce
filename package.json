@@ -11,6 +11,7 @@
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:dev": "PLAYWRIGHT_SKIP_WEBSERVER=1 PLAYWRIGHT_BASE_URL=http://127.0.0.1:3000 playwright test",
     "screenshots": "node scripts/capture-screenshots.mjs",
+    "lighthouse": "npx @lhci/cli autorun",
     "postinstall": "playwright install chromium"
   },
   "dependencies": {

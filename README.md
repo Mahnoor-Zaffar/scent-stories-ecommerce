@@ -301,8 +301,9 @@ interface Variant {
 | Payments | Apple/Google Pay UI mock | Stripe integration |
 | Auth | Client-side VIP mock | Clerk or NextAuth |
 | Catalog | Static TypeScript arrays | Sanity CMS |
-| Geo-IP | Mock middleware | Vercel Edge headers |
-| Monitoring | None | Lighthouse CI |
+| Geo-IP | Query param + middleware (`?region=GB`) | Vercel Edge headers |
+| Cart | Persists in `localStorage` across refresh | Server-side sync |
+| Monitoring | Lighthouse CI in GitHub Actions | Real user monitoring |
 
 ---
 
@@ -313,6 +314,7 @@ interface Variant {
 | [Case Study](./docs/CASE_STUDY.md) | Portfolio narrative and talking points |
 | [Deployment Guide](./docs/DEPLOYMENT.md) | Vercel setup and post-deploy checklist |
 | [PRD](./PRD.md) | Original product requirements |
+| [GitHub Topics](./docs/GITHUB_TOPICS.md) | Topics to add and pin instructions |
 
 ---
 

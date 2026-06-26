@@ -14,8 +14,7 @@ export const catalog: CatalogItem[] = [
       heart_notes: ["Black Orchid", "Turkish Rose", "Jasmine Sambac"],
       base_notes: ["Oud", "Sandalwood", "Vanilla Resin"],
       created_at: "2025-11-15T10:00:00Z",
-      image_url:
-        "https://images.unsplash.com/photo-1541643600914-78b084683601?w=1200&h=1600&fit=crop&q=80",
+      image_url: "/images/obsidian-orchid.jpg",
       hero_video_url:
         "https://assets.mixkit.co/videos/preview/mixkit-pouring-a-glass-of-red-wine-2356-large.mp4",
       scent_dna: {
@@ -65,8 +64,7 @@ export const catalog: CatalogItem[] = [
       heart_notes: ["Iris Butter", "White Tea", "Lavender"],
       base_notes: ["Virginia Cedar", "White Musk", "Vetiver"],
       created_at: "2025-09-22T14:30:00Z",
-      image_url:
-        "https://images.unsplash.com/photo-1541643600914-78b084683601?w=1200&h=1600&fit=crop&q=80",
+      image_url: "/images/cedar-and-silk.jpg",
       scent_dna: {
         woody: 88,
         floral: 45,
@@ -114,8 +112,7 @@ export const catalog: CatalogItem[] = [
       heart_notes: ["Benzoin", "Labdanum", "Honeyed Tobacco"],
       base_notes: ["Ambergris Accord", "Indonesian Patchouli", "Tonka Bean"],
       created_at: "2026-01-08T09:00:00Z",
-      image_url:
-        "https://images.unsplash.com/photo-1541643600914-78b084683601?w=1200&h=1600&fit=crop&q=80",
+      image_url: "/images/amber-meridian.jpg",
       scent_dna: {
         woody: 68,
         floral: 35,

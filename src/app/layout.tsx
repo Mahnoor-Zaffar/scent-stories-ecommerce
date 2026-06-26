@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { Playfair_Display, Inter } from "next/font/google";
 import { CartProvider } from "@/context/CartContext";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import RegionSync from "@/components/layout/RegionSync";
 import { generateOrganizationJsonLd } from "@/lib/seo";
 import "./globals.css";
 
@@ -63,6 +65,9 @@ export default function RootLayout({
       </head>
       <body className="font-sans min-h-screen flex flex-col">
         <CartProvider>
+          <Suspense fallback={null}>
+            <RegionSync />
+          </Suspense>
           <Header />
           <main className="flex-1 pt-16 md:pt-20">{children}</main>
           <Footer />

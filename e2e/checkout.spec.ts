@@ -30,8 +30,9 @@ test.describe("Checkout Pipeline", () => {
   test("recalculates totals for GB region", async ({ page }) => {
     await page.goto("/products/cedar-and-silk");
     await addProductAndOpenCheckout(page);
+    await page.goto("/checkout?region=GB");
 
-    await page.locator("#region-select").selectOption("GB");
+    await expect(page.locator("#region-select")).toHaveValue("GB");
     await expect(page.getByText(/Import Duties/i)).toBeVisible();
     await expect(page.getByText("Royal Mail International Priority")).toBeVisible();
   });
